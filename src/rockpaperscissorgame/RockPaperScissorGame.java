@@ -4,8 +4,8 @@ import java.util.Random;
 
 class RockPaperScissor{
     
-    private User user;
-    private Computer comp;
+    private final User user;
+    private final Computer comp;
     private int userScore;
     private int computerScore;
     private int numberOfGames;
@@ -211,8 +211,7 @@ class RockPaperScissor{
         
     }
     
-    public int menu(){
-        
+    public int start(){
         System.out.print("+");
         printDashes(46);
         System.out.println("+");
@@ -231,64 +230,66 @@ class RockPaperScissor{
         
         char firstLetter = start.charAt(0);
         
+        return firstLetter;
+    }
+    
+    public int menu(){
+         
+        Scanner input = new Scanner(System.in);
         int exit = 0;
-        
-        if(firstLetter == 'S'){
             
-            System.out.print("+");
-            printDashes(46);
-            System.out.println("+\n");
+        System.out.print("+");
+        printDashes(46);
+        System.out.println("+\n");
             
             
-            System.out.println("-------- MENU ---------\n");
-            System.out.println("---- 1. New Game ------");
-            System.out.println("---- 2. Continue Game -");
-            System.out.println("---- 3. Rules ---------");
-            System.out.println("---- 4. Exit ----------\n");
+        System.out.println("-------- MENU ---------\n");
+        System.out.println("---- 1. New Game ------");
+        System.out.println("---- 2. Continue Game -");
+        System.out.println("---- 3. Rules ---------");
+        System.out.println("---- 4. Exit ----------\n");
             
-            System.out.print("Your choice:- ");
-            int choice = input.nextInt();
+        System.out.print("Your choice:- ");
+        int choice = input.nextInt();
             
-            System.out.print("+");
-            printDashes(46);
-            System.out.println("+\n");
+        System.out.print("+");
+        printDashes(46);
+        System.out.println("+\n");
             
-            switch(choice){
+        switch(choice){
                 
-                case 1:
+            case 1:
                     
-                    userScore = 0;
-                    computerScore = 0;
-                    numberOfGames = 0;
+                userScore = 0;
+                computerScore = 0;
+                numberOfGames = 0;
                     
-                    startGame();
-                    break;
+                startGame();
+                break;
                     
-                case 2:
+            case 2:
                     
-                    if(userScore == 0 && computerScore == 0){
+                if(numberOfGames == 0){
                         
-                        System.out.print("Play New Game First...");
-                        break;
+                    System.out.println("Play New Game First...\n");
+                    break;
                         
-                    }
+                }
                     
-                    startGame();
-                    break;
+                startGame();
+                break;
                     
-                case 3:
+            case 3:
                     
-                    Rules();
-                    break;
+                Rules();
+                break;
                     
-                case 4:
+            case 4:
                     
-                    exit = 4;
-                    break;
+                exit = 4;
+                
                     
-            } 
-            
-        }
+        } 
         
         return exit;
         
@@ -300,11 +301,17 @@ public class RockPaperScissorGame {
 
     
     public static void main(String[] args) {
-        RockPaperScissor game = new RockPaperScissor();
         
-        while(game.menu()!=4){
+        RockPaperScissor game = new RockPaperScissor();
+        int exit = 0;
+        
+        if(game.start() == 'S'){
             
-            game.menu();
+            while(exit != 4){
+            
+                exit = game.menu();
+            
+            }
             
         }
         
